@@ -14,17 +14,15 @@ $query->execute([$email]);
 $user=$query->fetch(PDO::FETCH_OBJ);
 
 if(!empty($user)){
-  if ($user->email!="dareen@gmail.com")
-  {
-    if($password == $user->password)
-    {
+  
+    if($password == $user->password){
+        if ($user->email!="dareen@gmail.com"){
         echo "true/$user->email";
     }
-
-        else echo "true/$user->email/admin";
+        else 
+        echo "true/$user->email";
    }
-else
-{
+else{
     echo "false";
 }
 }else echo "false";

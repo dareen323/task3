@@ -1,7 +1,7 @@
 <?php
 require_once './connection.php';
 
-// Get the userid
+// Get  email
 $email=($_GET['email']);
 // $sql = "SELECT * from users where email=:e";
 
@@ -23,7 +23,6 @@ $email=($_GET['email']);
     <!-- <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script> -->
 </head>
 <body>
-
 
 <h2> Welcome <?php echo $email;?><h2>
 </body>

@@ -18,30 +18,36 @@ btn.addEventListener("click", function (e) {
   const matchPassword = Validation.PasswordValidation(password, cPassword);
   const mobileValidation = Validation.mobileValidation(mobile);
   const dateValidation = Validation.calculateRemainTime(birthday);
-// console.log( usernameValid , mobileValidation,dateValidation, emailValid , matchPassword  );
-    if(emailValid &&usernameValid && matchPassword && mobileValidation &&dateValidation){
-
-  fetch("http://localhost/task3/signup.php", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/x-www-form-urlencoded; charset=UTF-8",
-    },
-    body: `email=${email}&password=${password}&fullName=${fullName}&mobile=${mobile}&birthday=${birthday}`,
-  })
-    .then((response) => response.text())
-    .then((res) => {console.log(res);
-      if (res == "true") {
-        window.location.href = "./welcome.php?email=" + email;
-      } else {
-        alert("It looks like you’re already registered.");
-        window.location.href = "./login.html";
-      }
-    });}else alert("error")
+  // console.log( usernameValid , mobileValidation,dateValidation, emailValid , matchPassword  );
+  if (
+    emailValid &&
+    usernameValid &&
+    matchPassword &&
+    mobileValidation &&
+    dateValidation
+  ) {
+    fetch("http://localhost/task3/signup.php", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/x-www-form-urlencoded; charset=UTF-8",
+      },
+      body: `email=${email}&password=${password}&fullName=${fullName}&mobile=${mobile}&birthday=${birthday}`,
+    })
+      .then((response) => response.text())
+      .then((res) => {
+        console.log(res);
+        if (res == "true") {
+          window.location.href = "./welcome.php?email=" + email ;
+        } else {
+          alert("It looks like you’re already registered.");
+          window.location.href = "./login.html";
+        }
+      });
+  }
 });
 
 class Validation {
   static EmailValidation(email) {
-  
     if (/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(email)) {
       return true;
     }
@@ -60,9 +66,11 @@ class Validation {
   }
   //"^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$"
   static PasswordValidation(password, confirmPassword) {
-    var strongRegex = new RegExp("^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})");
+    var strongRegex = new RegExp(
+      "^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*])(?=.{8,})"
+    );
     if (strongRegex.test(password)) {
-      return true && Validation.MatchPassword(password, confirmPassword) ;
+      return true && Validation.MatchPassword(password, confirmPassword);
     }
     alert("inValid password ");
     return false;
@@ -94,11 +102,10 @@ class Validation {
     let date2 = new Date(dateAsString);
     let time = date1.getTime() - date2.getTime();
     let days = time / (1000 * 3600 * 24);
-    if( Math.floor(Math.abs(days)) > 5840)return true;
-    else{
+    if (Math.floor(Math.abs(days)) > 5840) return true;
+    else {
       alert("inValid Age ");
       return false;
-
     }
   }
 }

@@ -15,13 +15,16 @@ btn.addEventListener("click", function (e) {
   })
     .then((response) => response.text())
     .then((res) => {
-      let str = res.split("/");
       console.log(res);
+      let str = res.split("/");
+      console.log(str);
       if (str[0] == "true") {
-        if (str[2] == "admin")
-            window.location.href = "./admin.php?email=" + str[1];
-        else window.location.href = "./welcome.php.php?email=" + str[1];
-      } else {
+        if (str[1] == "dareen@gmail.com")
+        window.location.href = "./admin.php?email=" + str[1];
+
+        else window.location.href = "./welcome.php?email=" + str[1];
+      } 
+      else {
         alert("check your password and email .Please ");
       }
     });
